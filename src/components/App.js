@@ -32,7 +32,7 @@ const App = () => {
         <div id="wrapper">
           <div className="quote-text">{data.content}</div>
           <div className="quote-author">{data.author}</div>
-          <button id="new-quote" onClick={() => getData()}>Next Quote</button>
+          <button id="new-quote" className="button" onClick={() => getData()}>Next Quote</button>
         </div>
       </div>
     );
