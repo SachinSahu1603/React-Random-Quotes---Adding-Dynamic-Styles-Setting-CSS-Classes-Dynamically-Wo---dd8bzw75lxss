@@ -1,5 +1,5 @@
-import React from "react";
-import "../styles/App.css";
+import React, { useEffect, useState } from "react";
+ import "../styles/App.css";
 
 var colors = [
   '#16a085',
@@ -17,11 +17,22 @@ var colors = [
 ];
 
 const App = () => {
+   const [data, setData]= useState("")
+  const getData=async()=>{
+   const res = await fetch("https://api.quotable.io/random");
+   const data = await res.json();
+   setData(data)
+  }
+  useEffect(()=>{
+   getData()
+  },[])
 
     return (
       <div id="main">
         <div id="wrapper">
-          
+          <div className="quote-text">{data.content}</div>
+          <div className="quote-author">{data.author}</div>
+          <button id="new-quote" onClick={() => getData()}>Next Quote</button>
         </div>
       </div>
     );
