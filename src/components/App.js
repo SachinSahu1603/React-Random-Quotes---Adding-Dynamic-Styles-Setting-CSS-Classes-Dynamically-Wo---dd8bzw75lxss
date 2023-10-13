@@ -18,10 +18,13 @@ var colors = [
 
 const App = () => {
    const [data, setData]= useState("")
+   const [loading, setloading] = useState(false);
   const getData=async()=>{
+    setloading(true)
    const res = await fetch("https://api.quotable.io/random");
    const data = await res.json();
    setData(data)
+   setloading(false)
   }
   useEffect(()=>{
    getData()
@@ -29,11 +32,11 @@ const App = () => {
 
     return (
       <div id="main">
-        <div id="wrapper">
+      {loading?<div style={{color: "white"}}>Loading Data....</div>:<div id="wrapper">
           <div className="quote-text">{data.content}</div>
           <div className="quote-author">{data.author}</div>
           <button id="new-quote" className="button" onClick={() => getData()}>Next Quote</button>
-        </div>
+        </div>}
       </div>
     );
 };
